@@ -1,8 +1,8 @@
 import { TweetMediaWithText } from "../../core/usecases/tweet-media-with-text";
-import { CatMediaProviderApi } from "../../core/external/cat-media-provider";
-import { DaysCountPostMessageWriter } from "../../core/external/days-count-post-message-writer";
-import { LocalMediaManager } from "../../core/external/local-media-manager";
-import { TwitterApiV2 } from "../../core/external/twitter-api-v2";
+import { CatMediaProviderApi } from "../../infra/services/cat-media-provider";
+import { DaysCountPostMessageWriter } from "../../infra/services/days-count-post-message-writer";
+import { LocalMediaManager } from "../../infra/services/local-media-manager";
+import { TwitterApiV2 } from "../../infra/services/twitter-api-v2";
 import { TweetMediaController } from "../../presentation/controllers/tweet-media-controller";
 import { getMediaSourcePathConfig } from "../config/media-source-path-config";
 import { twitterClient } from "../config/twitter-api-v2-config";

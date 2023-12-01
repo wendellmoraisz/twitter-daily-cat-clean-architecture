@@ -1,7 +1,7 @@
-import { PostMessageWriter } from "../entities/post-message-writer";
+import { IPostMessageWriter } from "../../core/services/post-message-writer";
 
-export class DaysCountPostMessageWriter implements PostMessageWriter {
-    private referenceDate = new Date("03-05-2022");
+export class DaysCountPostMessageWriter implements IPostMessageWriter {
+    private readonly referenceDate = new Date("03-05-2022");
 
     getPostMessage(): string {
         return `${this.getDaysQuantity()} dias`;

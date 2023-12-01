@@ -1,22 +1,22 @@
 import fs from "fs";
 import request from "request";
-import { MediaManager } from "../entities/media-manager";
+import { IMediaManager } from "../../core/services/media-manager";
 
-export class LocalMediaManager implements MediaManager {
-    private defaultMediaDestinyPath;
+export class LocalMediaManager implements IMediaManager {
+    private readonly _defaultMediaDestinyPath;
 
     constructor(defaultMediaDestinyPath: string) {
-        this.defaultMediaDestinyPath = defaultMediaDestinyPath;
+        this._defaultMediaDestinyPath = defaultMediaDestinyPath;
     }
 
     async downloadAndSaveMedia(mediaUrl: string): Promise<string> {
         const stream = request.get(mediaUrl);
-        const fileStream = fs.createWriteStream(this.defaultMediaDestinyPath);
+        const fileStream = fs.createWriteStream(this._defaultMediaDestinyPath);
 
         return new Promise((resolve, reject) => {
 
             fileStream.on("error", (err) => {
-                console.log(this.defaultMediaDestinyPath)
+                console.log(this._defaultMediaDestinyPath)
                 reject(err);
             });
 
@@ -26,7 +26,7 @@ export class LocalMediaManager implements MediaManager {
             });
 
             fileStream.on("finish", () => {
-                resolve(this.defaultMediaDestinyPath);
+                resolve(this._defaultMediaDestinyPath);
             });
 
             stream.pipe(fileStream);

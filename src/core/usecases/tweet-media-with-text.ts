@@ -1,34 +1,34 @@
-import { MediaProviderApi } from "../entities/media-provider";
-import { MediaManager } from "../entities/media-manager";
-import { PostMessageWriter } from "../entities/post-message-writer";
-import { TwitterService } from "../entities/twitter-service";
+import { IMediaProviderApi } from "../services/media-provider";
+import { IMediaManager } from "../services/media-manager";
+import { IPostMessageWriter } from "../services/post-message-writer";
+import { ITwitterService } from "../services/twitter-service";
 
 export class TweetMediaWithText {
 
-    private readonly twitterService: TwitterService;
-    private readonly postMessageWriter: PostMessageWriter;
-    private readonly localMediaManager: MediaManager;
-    private readonly mediaProviderApi: MediaProviderApi;
+    private readonly _twitterService: ITwitterService;
+    private readonly _postMessageWriter: IPostMessageWriter;
+    private readonly _localMediaManager: IMediaManager;
+    private readonly _mediaProviderApi: IMediaProviderApi;
 
     constructor(
-        twitterApi: TwitterService,
-        postMessageWriter: PostMessageWriter,
-        localMediaManager: MediaManager,
-        mediaProviderApi: MediaProviderApi
+        twitterApi: ITwitterService,
+        postMessageWriter: IPostMessageWriter,
+        localMediaManager: IMediaManager,
+        mediaProviderApi: IMediaProviderApi
     ) {
-        this.twitterService = twitterApi;
-        this.postMessageWriter = postMessageWriter;
-        this.localMediaManager = localMediaManager;
-        this.mediaProviderApi = mediaProviderApi;
+        this._twitterService = twitterApi;
+        this._postMessageWriter = postMessageWriter;
+        this._localMediaManager = localMediaManager;
+        this._mediaProviderApi = mediaProviderApi;
     }
 
     public async tweetMediaWithText(): Promise<void> {
-        const mediaText = this.postMessageWriter.getPostMessage();
-        const mediaWithTextUrl = this.mediaProviderApi.getMediaWithTextUrl(mediaText);
+        const mediaText = this._postMessageWriter.getPostMessage();
+        const mediaWithTextUrl = this._mediaProviderApi.getMediaWithTextUrl(mediaText);
 
         try {
-            const downloadedImageSourcePath = await this.localMediaManager.downloadAndSaveMedia(mediaWithTextUrl)
-            await this.twitterService.tweetWithMedia(downloadedImageSourcePath);
+            const downloadedImageSourcePath = await this._localMediaManager.downloadAndSaveMedia(mediaWithTextUrl)
+            await this._twitterService.tweetWithMedia(downloadedImageSourcePath);
         } catch (error) {
             throw error;
         }
