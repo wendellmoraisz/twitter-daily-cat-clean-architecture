@@ -24,7 +24,7 @@ export class TweetMediaWithText {
 
     public async tweetMediaWithText(): Promise<void> {
         const mediaText = this._postMessageWriter.getPostMessage();
-        const mediaWithTextUrl = this._mediaProviderApi.getMediaWithTextUrl(mediaText);
+        const mediaWithTextUrl = this._mediaProviderApi.getMediaWithTextUrl(mediaText, "white");
 
         try {
             const downloadedImageSourcePath = await this._localMediaManager.downloadAndSaveMedia(mediaWithTextUrl)

@@ -1,3 +1,3 @@
 export interface IMediaProviderApi {
-    getMediaWithTextUrl(text: string): string
+    getMediaWithTextUrl(text: string, textColor: string): string
 }
