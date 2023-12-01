@@ -9,7 +9,7 @@ import { twitterClient } from "../config/twitter-api-v2-config";
 
 export const makeTweetMediaController = (): TweetMediaController => {
     const twitterApi = new TwitterApiV2(twitterClient);
-    const daysCountPostMessageWriter = new DaysCountPostMessageWriter();
+    const daysCountPostMessageWriter = new DaysCountPostMessageWriter(new Date("03-05-2022"));
     const localMediaManager = new LocalMediaManager(getMediaSourcePathConfig());
     const catMediaProviderApi = new CatMediaProviderApi();
 
